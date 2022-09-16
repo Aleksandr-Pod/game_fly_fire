@@ -16,10 +16,10 @@ export const SpriteObj = ({left, top, fire}) => {
     const bulletStyle = {
         position: "absolute",
         width: 0,
-        height: "300px",
+        height: `${top-10}px`,
         backgroundColor: "red",
         left: `${left+24}px`,
-        top: `${top-310}px`
+        top: "10px"
     };
     const bulletFly = () => {
         bulletStyle.width = "2px";
