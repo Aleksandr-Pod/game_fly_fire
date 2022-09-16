@@ -6,9 +6,10 @@ import './App.css';
 function App() {
   const [left, setLeft] = useState(position.left);
   const [top, setTop] = useState(position.top);
+  const [fire, setFire] = useState(false);
 
   const handleKeydown = useCallback((e) => {
-
+    // console.log(e.code)
     switch (e.code) {
       case "ArrowLeft":
         setLeft(prev => prev - 10);
@@ -26,6 +27,11 @@ function App() {
         setTop(prev => prev + 10);
         position.top +=10;
         break;
+      case "Space":
+        console.log("fire");
+        setFire(true);
+        setTimeout(() => setFire(false), 100);
+        break;  
       default:
         break;
     }
@@ -39,7 +45,7 @@ useEffect(() => {
 
   return (
     <div className='field' onKeyDown={handleKeydown}>
-      <SpriteObj top={top} left={left}/>
+      <SpriteObj top={top} left={left} fire={fire}/>
     </div>
   );
 }
