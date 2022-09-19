@@ -61,30 +61,25 @@ function App() {
         clearInterval(leftIntervalId.current);
         leftIntervalId.current = null;
         console.log("keyUp:", e.code);
-        // document.removeEventListener('keyup', handleKeyup);
         break;
       case "ArrowRight":
         clearInterval(rightIntervalId.current);
         rightIntervalId.current = null;
         console.log("keyUp:", e.code);
-        // document.removeEventListener('keyup', handleKeyup);
         break;
       case "ArrowUp":
         clearInterval(upIntervalId.current);
         upIntervalId.current = null;
         console.log("keyUp:", e.code);
-        // document.removeEventListener('keyup', handleKeyup);
         break;
       case "ArrowDown":
         clearInterval(downIntervalId.current);
         downIntervalId.current = null;
         console.log("keyUp:", e.code);
-        // document.removeEventListener('keyup', handleKeyup);
         break;
       default:
         break;
     }
-
   }
   
   const start = () => {
