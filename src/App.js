@@ -19,29 +19,26 @@ function App() {
         if (leftIntervalId.current) return;
         if (rightIntervalId.current) return;// if left & was right
         leftIntervalId.current = setInterval(
-          () => setLeft(prev => prev > 100 ? prev - 10 : prev), 20
+          () => setLeft(prev => prev > 0 ? prev - 10 : prev), 20
         );
         break;
       case "ArrowRight":
-        // if (left > 900) return;
         if (rightIntervalId.current) return;
         if (leftIntervalId.current) return; // if right & was left 
         rightIntervalId.current = setInterval(
-          () => setLeft(prev => prev < 900 ? prev + 10 : prev), 20
+          () => setLeft(prev => prev < 950 ? prev + 10 : prev), 20
         );
         break;
       case "ArrowUp":
-        // if (top < 200) return;
         if (upIntervalId.current) return;
         upIntervalId.current = setInterval(
           () => setTop(prev => prev > 200 ? prev - 10 : prev), 20
         );
         break;
       case "ArrowDown":
-        // if (top > 600) return;
         if (downIntervalId.current) return;
         downIntervalId.current = setInterval(
-          () => setTop(prev => prev < 500 ? prev + 10 : prev), 20
+          () => setTop(prev => prev < 600 ? prev + 10 : prev), 20
         );
         break;
       case "Space":
@@ -88,14 +85,18 @@ function App() {
   }
 
   return (
-    <div className='field' onKeyDown={handleKeydown}><hr/>
-      <p>стрелками на клавиатуре перемещайте ваш самолёт</p>
-      <p>Пробел - это выстрел</p>
+    <>
+      <h2>стрелками на клавиатуре перемещайте ваш самолёт</h2>
+      <h2>Пробел - огонь</h2>
       <button type="button" onClick={start}>START</button>
-      <p>top: {top}_______left: {left}</p>
-
-      <SpriteObj top={top} left={left} fire={fire}/>
-    </div>
+      <p className="position">top: <span className="pos-figure">{top}</span>_______left:<span className="pos-figure">{left}</span></p>
+      
+      <div className="field" onKeyDown={handleKeydown}>
+        <div className="stars"></div>
+        <div className="twinkling"></div>
+        <SpriteObj top={top} left={left} fire={fire}/>
+      </div>
+    </>
   );
 }
 

@@ -3,6 +3,7 @@
 export const SpriteObj = ({left, top, fire}) => {
     const spriteStyle = {
         position: "absolute",
+        zIndex: 5,
         width: "50px",
         height: "50px",
         backgroundColor: "blue",

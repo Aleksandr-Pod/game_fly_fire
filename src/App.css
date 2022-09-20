@@ -1,11 +1,48 @@
+h2 {margin: 0}
 .field {
   position: absolute;
-  display: block;
-
+  /* display: block; */
   top: 100px;
-  left: 10px;
-  width: calc(100% - 25px);
+  left: 100px;
+  width: 1000px;
   height: calc(100% - 100px);
 }
-
-
+.stars, .twinkling {
+  position: absolute;
+  width: 1000px;
+  height: 650px;
+}
+.stars {
+  background: black url(./images/stars.png) repeat top center;
+  z-index: 0;
+  animation: move-stars 15s linear infinite;
+}
+.twinkling {
+  background: transparent url(./images/twinkling.png) repeat top center;
+  z-index: 1;
+  animation: move-twinkling 15s linear infinite;
+}
+button {
+  position: absolute;
+  top: 20px;
+  left: 1000px;
+  width: 100px;
+  height: 40px;
+}
+.position {
+  position: absolute;
+  top: 60px;
+  left: 900px;
+}
+.pos-figure {
+  padding: 5px;
+  background-color: rgb(224, 255, 88);
+}
+@keyframes move-stars {
+  from {background-position:0 0;}
+  to {background-position:0 1375px;}
+}
+@keyframes move-twinkling {
+  from {background-position:0 0;}
+  to {background-position:900px 0;}
+}
