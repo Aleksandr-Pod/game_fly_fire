@@ -64,22 +64,22 @@ function App() {
       case "ArrowLeft":
         clearInterval(moveIntervalId.left);
         moveIntervalId.left = null;
-        console.log("keyUp:", e.code);
+        // console.log("keyUp:", e.code);
         break;
       case "ArrowRight":
         clearInterval(moveIntervalId.right);
         moveIntervalId.right = null;
-        console.log("keyUp:", e.code);
+        // console.log("keyUp:", e.code);
         break;
       case "ArrowUp":
         clearInterval(moveIntervalId.up);
         moveIntervalId.up = null;
-        console.log("keyUp:", e.code);
+        // console.log("keyUp:", e.code);
         break;
       case "ArrowDown":
         clearInterval(moveIntervalId.down);
         moveIntervalId.down = null;
-        console.log("keyUp:", e.code);
+        // console.log("keyUp:", e.code);
         break;
       default:
         break;
@@ -88,19 +88,19 @@ function App() {
   const meteorFly = () => {
     globalData.meteorPositionX = Math.floor(Math.random() * (950 - 100) + 100);
     setMeteor(true);
-    setTimeout(() => {setMeteor(false)}, 3000);
-    console.log("meteorFly x:", globalData.meteorPositionX);
+    setTimeout(() => {setMeteor(false)}, 3000); // false should be
+    // when it off the screen -- or crashed by laser -- or met a starship
   }
   
   const start = () => {
     document.addEventListener('keydown', handleKeydown);
     document.addEventListener('keyup', handleKeyup);
-    globalData.meteorFlyId = setInterval(() => meteorFly(), 5000);
+    globalData.meteorFlyId = setInterval(() => meteorFly(), 4000);
 
   }
-  const stop = () => {
-    clearInterval(globalData.meteorFlyId);
-  }
+  // const stop = () => {
+  //   clearInterval(globalData.meteorFlyId);
+  // }
 
   return (
     <><div className="dashboard">

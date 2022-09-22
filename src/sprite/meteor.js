@@ -1,15 +1,18 @@
-import './meteor.css';
+import { useEffect } from 'react';
+import { globalData } from '../position';
+import './meteor.styled.js';
+import { MeteorSprite } from './meteor.styled.js';
 
 const Meteor = ({x}) => {
-    console.log("position x in component:", x)
-    const style = {
-        left: `${x}px`,
-    }
+    useEffect (() => {
+        if (globalData.meteorPositionX)
+        console.log("position x in component:", x)
+    }, [x])
+    
 
-return (
-   <div className="meteor" style={style}>
-
-   </div> 
-)
+    return (
+        <MeteorSprite left={x}></MeteorSprite> 
+    )
 }
+
 export default Meteor;
