@@ -1,7 +1,7 @@
 import styled from "styled-components";
 // import { position } from "../position";
 
-export const Sprite = styled.div`
+export const StarshipSprite = styled.div`
     position: absolute;
     z-Index: 5;
     width: 50px;
