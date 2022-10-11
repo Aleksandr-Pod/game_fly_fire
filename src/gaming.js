@@ -9,7 +9,7 @@ const Gaming = () => {
   const [left, setLeft] = useState(200);
   const [top, setTop] = useState(400);
   const [fire, setFire] = useState(false);
-  // meteor
+  // meteor, asteroid
   const [meteor, setMeteor] = useState(false);
   const [asteroid, setAsteroid] = useState(false);
 
@@ -18,6 +18,7 @@ const Gaming = () => {
   useEffect(() => {
     function handleKeydown(e) {
       // console.log(e.code)
+      console.log('keyDown');
       switch (e.code) {
         case "ArrowLeft":
           if (moveIntervalId.left) return;
@@ -56,83 +57,71 @@ const Gaming = () => {
     };
   
     function handleKeyup(e) {
+      console.log('keyUp');
       switch (e.code) {
         case "ArrowLeft":
           clearInterval(moveIntervalId.left);
           moveIntervalId.left = null;
-          // console.log("keyUp:", e.code);
           break;
         case "ArrowRight":
           clearInterval(moveIntervalId.right);
           moveIntervalId.right = null;
-          // console.log("keyUp:", e.code);
           break;
         case "ArrowUp":
           clearInterval(moveIntervalId.up);
           moveIntervalId.up = null;
-          // console.log("keyUp:", e.code);
           break;
         case "ArrowDown":
           clearInterval(moveIntervalId.down);
           moveIntervalId.down = null;
-          // console.log("keyUp:", e.code);
           break;
         default:
           break;
       }
     }
-    
+    console.log("EventListeners - on");
     document.addEventListener('keydown', handleKeydown);
     document.addEventListener('keyup', handleKeyup);
     return () => {
       document.removeEventListener('keydown', handleKeydown);
       document.removeEventListener('keyup', handleKeyup);
+      console.log("EventListeners - off");
     }
-  }, [moveIntervalId])
+  }, [])
 
   useEffect(()=> {
-    if(globalData.meteor.flyId) return;
+    if(globalData.meteor.timer) return;
+    // calculate time of flying
+    globalData.meteor.timer = Math.floor(Math.random()*1500+500);
+    console.log('meteorFly in ..', globalData.meteor.timer, "mSec");
+    globalData.meteor.positionX = Math.floor(Math.random() * (950 - 100) + 100);
+    // setTimeout(() => setMeteor(true), globalData.meteor.timer);
+    setMeteor(true);
+  },[meteor])
 
-    globalData.meteor.flyId = setInterval(() => meteorFly(), 4000);
-    console.log('meteorFly');
+  // useEffect(()=> {
+  //   if(globalData.asteroid.flyId) return;
 
-    function meteorFly() {
-      globalData.meteor.positionX = Math.floor(Math.random() * (950 - 100) + 100);
-      setMeteor(true);
-      setTimeout(() => {setMeteor(false)}, 3000); // false should be
-      // when it off the screen -- or crashed by laser -- or met a starship
-    }
-    return () => {
-      clearTimeout(globalData.meteor.flyId);
-      globalData.meteor.flyId = null;
-    }
-  },[])
+  //   globalData.asteroid.flyId = setInterval(()=> asteroidFly(), 6000);
 
-  useEffect(()=> {
-    if(globalData.asteroid.flyId) return;
+  //   function asteroidFly() {
+  //     globalData.asteroid.rotationDegree = 450 - Math.floor(Math.random() * (1000-100)+100);
+  //     globalData.asteroid.positionX = Math.floor(Math.random() * (950 - 100) + 100);
+  //     setAsteroid(true);
+  //     setTimeout(() => {setAsteroid(false)}, 5000); // false should be
+  //     // when it off the screen -- or crashed by laser -- or met a starship
+  //   }
 
-    globalData.asteroid.flyId = setInterval(()=> asteroidFly(), 6000);
-    console.log("asteroidFly");
-
-    function asteroidFly() {
-      globalData.asteroid.rotationDegree = 450 - Math.floor(Math.random() * (1000-100)+100);
-      console.log("asteroid rotation", globalData.asteroid.rotationDegree);
-      globalData.asteroid.positionX = Math.floor(Math.random() * (950 - 100) + 100);
-      setAsteroid(true);
-      setTimeout(() => {setAsteroid(false)}, 5000); // false should be
-      // when it off the screen -- or crashed by laser -- or met a starship
-    }
-
-    return () => {
-      clearTimeout(globalData.asteroid.flyId);
-      globalData.asteroid.flyId = null;
-    }
-  },[])
+  //   return () => {
+  //     clearTimeout(globalData.asteroid.flyId);
+  //     globalData.asteroid.flyId = null;
+  //   }
+  // },[])
     
   return (
     <>
       <Starship top={top} left={left} fire={fire}/>
-      {meteor && <Meteor x={globalData.meteor.positionX}/>}
+      {meteor && <Meteor x={globalData.meteor.positionX} setMeteor={setMeteor}/>}
       {asteroid && <Asteroid x={globalData.asteroid.positionX}
         degree={globalData.asteroid.rotationDegree}/>}
     </>

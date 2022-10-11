@@ -13,7 +13,9 @@ export const globalData = {
 
     meteor: {
         flyId: null,
+        timer: null,
         positionX: 500,
+        posY: null,
         directionDegree: -20,
     },
     asteroid: {

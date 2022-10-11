@@ -18,11 +18,9 @@ function App() {
         </div>
       </div>
       <div className="field">
-        {/* {meteor && <Meteor x={globalData.meteorPositionX}/>} */}
         <div className="stars"></div>
         <div className="twinkling"></div>
         {started && <Gaming/>}
-        {/* <Starship top={top} left={left} fire={fire}/> */}
       </div>
     </>
   );
