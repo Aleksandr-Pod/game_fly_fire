@@ -21,7 +21,7 @@ const Gaming = () => {
 
   const {moveIntervalId} = globalData;
 
-
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const handleKeyup = useCallback((e) => {
     switch (e.code) {
       case "ArrowLeft":
@@ -109,7 +109,7 @@ const Gaming = () => {
       document.removeEventListener('keyup', handleKeyup);
       console.log("Key EventListeners Off");
     }
-  }, [])
+  }, [handleKeydown, handleKeyup])
 
   useEffect(()=> {
     if(globalData.meteor.timer) return;
