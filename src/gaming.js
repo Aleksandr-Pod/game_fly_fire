@@ -21,7 +21,6 @@ const Gaming = () => {
 
   const {moveIntervalId} = globalData;
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   const handleKeyup = useCallback((e) => {
     switch (e.code) {
       case "ArrowLeft":
@@ -47,7 +46,7 @@ const Gaming = () => {
       default:
         break;
     }
-  });
+  }, [moveIntervalId]);
 
   const handleKeydown = useCallback((e) =>  {
     // console.log(e.code)
@@ -98,7 +97,7 @@ const Gaming = () => {
       default:
         break;
     }
-  });
+  }, [dispatch, left, moveIntervalId, top]);
 
   useEffect(() => {
     console.log("Key EventListeners ON");
