@@ -15,7 +15,7 @@ export const Asteroid = ({x, speed, degree, setAsteroid}) => {
       globalData.asteroid.flyId = null;
       globalData.asteroid.timer = null;
     }
-  }, [])
+  }, [speed])
   
   if (y > 600) setTimeout(() => setAsteroid(false), 20); // unMount in parent component
 

@@ -14,7 +14,7 @@ export const Meteor = ({x, speed, setMeteor}) => {
       globalData.meteor.flyId = null;
       globalData.meteor.timer = null;
     }
-  }, [])
+  }, [speed])
   
   if (y > 600) setTimeout(() => setMeteor(false), 20); // unMount in parent component
 
