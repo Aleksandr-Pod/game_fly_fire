@@ -2,12 +2,12 @@ import { useState, useEffect } from 'react';
 import { globalData } from '../globalData';
 import img from "../images/meteor.png";
 
-export const Meteor = ({x, setMeteor}) => {
+export const Meteor = ({x, speed, setMeteor}) => {
   const [y, setY] = useState(-100);
 
   useEffect(() => {
     if (!globalData.meteor.flyId) {
-      globalData.meteor.flyId = setInterval(() => setY(prev => prev +5), 20);
+      globalData.meteor.flyId = setInterval(() => setY(prev => prev + speed), 20);
     }
     return () => {
       clearInterval(globalData.meteor.flyId);

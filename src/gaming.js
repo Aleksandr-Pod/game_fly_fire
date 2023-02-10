@@ -86,14 +86,14 @@ const Gaming = () => {
         moveIntervalId.down = setInterval(
           () => {
           // setTop(prev => prev < 450 ? prev + 10 : prev)
-          if (top < 450) dispatch(setY(10))
+          if (top < 550) dispatch(setY(10))
         }, 20
         );
         break;
       case "Space":
         console.log("fire");
-        setFire(true);
-        setTimeout(() => setFire(false), 100);
+        dispatch(setFire(true));
+        setTimeout(() => dispatch(setFire(false)), 100);
         break;  
       default:
         break;
@@ -113,38 +113,31 @@ const Gaming = () => {
 
   useEffect(()=> {
     if(globalData.meteor.timer) return;
-    // calculate time of flying
+      // calculate time of flying
     globalData.meteor.timer = Math.floor(Math.random()*1500+500);
     console.log('meteorFly in ..', globalData.meteor.timer, "mSec");
     globalData.meteor.positionX = Math.floor(Math.random() * (950 - 100) + 100);
+    globalData.meteor.speed = Math.floor(Math.random() * 7 + 3);
     setTimeout(() => setMeteor(true), globalData.meteor.timer);
   },[meteor])
 
-  // useEffect(()=> {
-  //   if(globalData.asteroid.flyId) return;
-
-  //   globalData.asteroid.flyId = setInterval(()=> asteroidFly(), 6000);
-
-  //   function asteroidFly() {
-  //     globalData.asteroid.rotationDegree = 450 - Math.floor(Math.random() * (1000-100)+100);
-  //     globalData.asteroid.positionX = Math.floor(Math.random() * (950 - 100) + 100);
-  //     setAsteroid(true);
-  //     setTimeout(() => {setAsteroid(false)}, 5000); // false should be
-  //     // when it off the screen -- or crashed by laser -- or met a starship
-  //   }
-
-  //   return () => {
-  //     clearTimeout(globalData.asteroid.flyId);
-  //     globalData.asteroid.flyId = null;
-  //   }
-  // },[])
+  useEffect(()=> {
+    if(globalData.asteroid.timer) return;
+      // calculate time of flying
+    globalData.asteroid.timer = Math.floor(Math.random()*1500+500);
+    console.log('asteroid fly in ..', globalData.asteroid.timer, "mSec");
+    globalData.asteroid.positionX = Math.floor(Math.random() * (950 - 100) + 100);
+    globalData.asteroid.speed = Math.floor(Math.random() * 7 + 3);
+    setTimeout(()=> setAsteroid(true), globalData.asteroid.timer);
+  },[asteroid])
     
   return (
     <>
       <Starship top={top} left={left} fire={fire}/>
-      {meteor && <Meteor x={globalData.meteor.positionX} setMeteor={setMeteor}/>}
-      {asteroid && <Asteroid x={globalData.asteroid.positionX}
-        degree={globalData.asteroid.rotationDegree}/>}
+      {meteor && <Meteor x={globalData.meteor.positionX} speed={globalData.meteor.speed}
+      setMeteor={setMeteor}/>}
+      {asteroid && <Asteroid x={globalData.asteroid.positionX} speed={globalData.asteroid.speed}
+        degree={globalData.asteroid.rotationDegree} setAsteroid={setAsteroid}/>}
     </>
   )
 }

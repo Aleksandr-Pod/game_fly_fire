@@ -16,11 +16,15 @@ export const globalData = {
         timer: null,
         positionX: 500,
         posY: null,
+        speed: null,
         directionDegree: -20,
     },
     asteroid: {
         flyId: null,
+        timer: null,
         positionX: 300,
+        posY: null,
+        speed: null,
         rotationDegree: 200,
     }
     // fieldRef: document.querySelector('.field')
