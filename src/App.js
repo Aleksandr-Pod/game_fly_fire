@@ -1,4 +1,4 @@
-import {useState} from "react";
+import { useState } from "react";
 import Gaming from "./gaming";
 import './App.css';
 

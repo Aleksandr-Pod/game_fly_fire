@@ -1,26 +1,32 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { globalData } from '../globalData';
-import { MeteorSprite } from './meteor.styled';
+import img from "../images/meteor.png";
 
 export const Meteor = ({x, setMeteor}) => {
-    const [y, setY] = useState(-100);
+  const [y, setY] = useState(-100);
 
-    // on Mount - move down every 20 msec
-    if (y === -100) {
-        console.log('starting meteor move');
-        globalData.meteor.flyId = setInterval(() => {
-            setY(prev => prev +5);
-        }, 20);
+  useEffect(() => {
+    if (!globalData.meteor.flyId) {
+      globalData.meteor.flyId = setInterval(() => setY(prev => prev +5), 20);
     }
-    
-    if (y > 600){
-        console.log("stop meteor move");
-        clearInterval(globalData.meteor.flyId);
-        globalData.meteor.timer = null;
-        setTimeout(() => setMeteor(false), 20); // unMount in parent component
+    return () => {
+      clearInterval(globalData.meteor.flyId);
+      globalData.meteor.flyId = null;
+      globalData.meteor.timer = null;
     }
+  }, [])
+  
+  if (y > 600) setTimeout(() => setMeteor(false), 20); // unMount in parent component
 
-    return (
-        <MeteorSprite left={x} top={y}></MeteorSprite> 
-    )
+  return (
+    <div style={{
+      position: "absolute",
+      width: 100,
+      height: 100,
+      left: x,
+      top: y,
+      zIndex: 5,
+      background: `transparent url(${img}) top / contain`
+      }}></div>
+  )
 }
