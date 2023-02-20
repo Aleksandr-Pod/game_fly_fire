@@ -1,10 +1,27 @@
-import {BulletStyle, StarshipSprite} from './starship.styled.js';
+import { useSelector } from 'react-redux';
+import {StarshipSprite} from './starship.styled.js';
 
-export const Starship = ({left, top, fire}) => {
+export const Starship = () => {
+    const {top, left, fire} = useSelector(state => state.position);
     return (
         <>
-            <BulletStyle left={left} top={top} fire={fire}></BulletStyle>
-            <StarshipSprite left={left} top={top} bgrColor={fire ? "orange" : "blue"}>A</StarshipSprite>
+            <div class="fire" style={{
+                position: "absolute",
+                width: fire ? "2px" : 0,
+                height: top-10,
+                left: left+24,
+                backgroundColor: "red",
+                top: 10
+            }}></div>
+            <div style={{
+                position: "absolute",
+                zIndex: 5,
+                top: top,
+                left: left,
+                backgroundColor: fire ? "orange" : "transparent"
+            }}>
+            <StarshipSprite/>
+            </div>
         </>
     )
 }

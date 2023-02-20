@@ -10,7 +10,7 @@ import { globalData } from "./globalData";
 
 const Gaming = () => {
   const dispatch = useDispatch();
-  const {left, top, fire} = useSelector(state => state.position)
+  const {left, top} = useSelector(state => state.position)
   // starship states:
   // const [left, setLeft] = useState(200);
   // const [top, setTop] = useState(400);
@@ -108,7 +108,7 @@ const Gaming = () => {
       document.removeEventListener('keyup', handleKeyup);
       console.log("Key EventListeners Off");
     }
-  }, [handleKeydown, handleKeyup])
+  }, [])
 
   useEffect(()=> {
     if(globalData.meteor.timer) return;
@@ -116,7 +116,7 @@ const Gaming = () => {
     globalData.meteor.timer = Math.floor(Math.random()*1500+500);
     console.log('meteorFly in ..', globalData.meteor.timer, "mSec");
     globalData.meteor.positionX = Math.floor(Math.random() * (950 - 100) + 100);
-    globalData.meteor.speed = Math.floor(Math.random() * 7 + 3);
+    globalData.meteor.speed = Math.floor(Math.random() * 4 + 1);
     setTimeout(() => setMeteor(true), globalData.meteor.timer);
   },[meteor])
 
@@ -126,13 +126,13 @@ const Gaming = () => {
     globalData.asteroid.timer = Math.floor(Math.random()*1500+500);
     console.log('asteroid fly in ..', globalData.asteroid.timer, "mSec");
     globalData.asteroid.positionX = Math.floor(Math.random() * (950 - 100) + 100);
-    globalData.asteroid.speed = Math.floor(Math.random() * 7 + 3);
+    globalData.asteroid.speed = Math.floor(Math.random() * 4 + 1);
     setTimeout(()=> setAsteroid(true), globalData.asteroid.timer);
   },[asteroid])
     
   return (
     <>
-      <Starship top={top} left={left} fire={fire}/>
+      <Starship/>
       {meteor && <Meteor x={globalData.meteor.positionX} speed={globalData.meteor.speed}
       setMeteor={setMeteor}/>}
       {asteroid && <Asteroid x={globalData.asteroid.positionX} speed={globalData.asteroid.speed}

@@ -13,10 +13,8 @@ const moveDown = degree => keyframes`
 `
 
 export const AsteroidSprite = styled.div `
-    position: absolute;
     width: 100px;
     height: 100px;
-    z-index: 5;
     background: transparent url(${img}) center / contain;
     animation: ${props => moveDown(props.degree)} 5s linear;
 `

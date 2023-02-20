@@ -13,10 +13,10 @@ button {
 .field {
   position: absolute;
   /* display: block; */
-  top: 100px;
+  top: 64px;
   left: 100px;
-  width: 1000px;
-  height: calc(100% - 150px);
+  width: calc(100vw - 120px);
+  height: calc(100vh - 84px);
   overflow: hidden;
 }
 .stars, .twinkling {

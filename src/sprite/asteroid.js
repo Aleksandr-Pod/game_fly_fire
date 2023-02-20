@@ -1,5 +1,5 @@
 import {useState, useEffect } from "react";
-// import { AsteroidSprite } from './asteroid.styled.js';
+import { AsteroidSprite } from './asteroid.styled.js';
 import { globalData } from '../globalData';
 import img from "../images/asteroid-1.png";
 
@@ -8,7 +8,7 @@ export const Asteroid = ({x, speed, degree, setAsteroid}) => {
 
   useEffect(() => {
     if (!globalData.asteroid.flyId) {
-      globalData.asteroid.flyId = setInterval(() => setY(prev => prev + speed), 20);
+      globalData.asteroid.flyId = setInterval(() => setY(prev => prev + speed), 16);
     }
     return () => {
       clearInterval(globalData.asteroid.flyId);
@@ -17,19 +17,16 @@ export const Asteroid = ({x, speed, degree, setAsteroid}) => {
     }
   }, [speed])
   
-  if (y > 600) setTimeout(() => setAsteroid(false), 20); // unMount in parent component
+  if (y > 800) setTimeout(() => setAsteroid(false), 20); // unMount in parent component
 
   return (
     <div style={{
       position: "absolute",
-      width: 100,
-      height: 100,
       left: x,
       top: y,
       zIndex: 5,
-      background: `transparent url(${img}) top / contain`
       }}>
-
+      <AsteroidSprite degree={degree}/>
     </div>
   )
 }

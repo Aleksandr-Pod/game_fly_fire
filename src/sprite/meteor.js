@@ -7,7 +7,7 @@ export const Meteor = ({x, speed, setMeteor}) => {
 
   useEffect(() => {
     if (!globalData.meteor.flyId) {
-      globalData.meteor.flyId = setInterval(() => setY(prev => prev + speed), 20);
+      globalData.meteor.flyId = setInterval(() => setY(prev => prev + speed), 16);
     }
     return () => {
       clearInterval(globalData.meteor.flyId);
@@ -16,7 +16,7 @@ export const Meteor = ({x, speed, setMeteor}) => {
     }
   }, [speed])
   
-  if (y > 600) setTimeout(() => setMeteor(false), 20); // unMount in parent component
+  if (y > 800) setTimeout(() => setMeteor(false), 16); // unMount in parent component
 
   return (
     <div style={{
